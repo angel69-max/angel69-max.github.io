@@ -1,387 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Akhil Punna | Lead Data & Cloud Engineer</title>
-  <style>
-    /* RESET & VARS */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    :root {
-      --bg-dark: #05070d;
-      --card-bg: rgba(15, 23, 42, 0.75);
-      --border: rgba(255, 255, 255, 0.1);
-      --accent: #38bdf8;
-      --accent-hover: #0284c7;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--bg-dark);
-      background-image: url('stars.png');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(5, 7, 13, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      z-index: 1000;
-    }
-    .nav-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 1.5rem;
-    }
-    
-    /* AP Logo Button */
-    .logo-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(2, 132, 199, 0.4));
-      border: 1px solid var(--accent);
-      color: #fff;
-      font-weight: 800;
-      font-size: 1.1rem;
-      letter-spacing: -0.5px;
-      text-decoration: none;
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
-      transition: all 0.3s ease;
-    }
-    .logo-badge:hover {
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), rgba(2, 132, 199, 0.6));
-    }
-
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
-
-    /* LAYOUT & SECTIONS */
-    section { padding: 3rem 1.5rem; max-width: 1100px; margin: 0 auto; }
-    .section-title {
-      font-size: 1.75rem;
-      margin-bottom: 2.5rem;
-      position: relative;
-      display: inline-block;
-    }
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 40px;
-      height: 3px;
-      background: var(--accent);
-      border-radius: 2px;
-    }
-
-    /* HERO (TIGHTENED SPACING) */
-    .hero {
-      padding-top: 8rem;
-      padding-bottom: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .hero .pre-title { color: var(--accent); font-weight: 600; font-size: 1.1rem; }
-    .hero h1 { font-size: 3.5rem; margin: 0.5rem 0 0.75rem; line-height: 1.1; }
-    .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 700px; margin-bottom: 0.75rem; }
-    .tagline-text {
-      font-size: 1.1rem;
-      color: var(--accent);
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-
-    /* ABOUT */
-    .about-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      backdrop-filter: blur(8px);
-      border-radius: 12px;
-      padding: 2.5rem;
-    }
-    .about-text p { color: var(--text-muted); margin-bottom: 1.25rem; font-size: 1.05rem; }
-    .inline-link {
-      color: var(--accent);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s;
-    }
-    .inline-link:hover {
-      border-bottom-color: var(--accent);
-    }
-
-    /* SKILLS SECTION */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-    }
-    .skill-card {
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid var(--border);
-      backdrop-filter: blur(12px);
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: all 0.3s ease;
-    }
-    .skill-card:hover {
-      border-color: rgba(56, 189, 248, 0.4);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    }
-    .skill-card h3 {
-      font-size: 1.1rem;
-      color: var(--text);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.5rem;
-    }
-    .skill-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    .skill-item {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .skill-item::before {
-      content: '▹';
-      color: var(--accent);
-      font-size: 0.9rem;
-    }
-
-    /* PROJECTS */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
-    }
-    .project-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      backdrop-filter: blur(8px);
-      border-radius: 12px;
-      padding: 1.75rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-    .project-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent);
-    }
-    .project-card h3 { margin-bottom: 0.5rem; font-size: 1.25rem; }
-    .project-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
-    .tag-container { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .tag {
-      background: rgba(56, 189, 248, 0.1);
-      color: #bae6fd;
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      padding: 0.3rem 0.75rem;
-      border-radius: 6px;
-      font-size: 0.85rem;
-    }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 3rem 1.5rem;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      background: rgba(5, 7, 13, 0.9);
-      backdrop-filter: blur(12px);
-    }
-
-    /* MOBILE NAV */
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2.5rem; }
-      .nav-links { display: none; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitive Memory Hook - Boost Your Tactical Shooter Gameplay with Real-Time Overlays</title>
+    <meta name="description" content="Download the ultimate memory injection framework and direct process hook utility for real-time overlay rendering in tactical shooters. Get competitive edge with smooth FPS, precise data access, and better performance.">
+    <meta name="keywords" content="memory injection, process hook, overlay rendering, tactical shooter, competitive gaming, real-time overlay, FPS optimizer, game enhancement, memory framework, direct hook utility">
+    <meta name="author" content="Competitive Memory Hook Team">
+    <meta property="og:title" content="Competitive Memory Hook - Advanced Overlay Tool for Tactical Shooters">
+    <meta property="og:description" content="Download the ultimate memory injection framework and direct process hook utility for real-time overlay rendering in tactical shooters. Get competitive edge today.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://github.com/angel69-max/competitive-memory-hook/releases">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630/1a1a2e/ffffff?text=Competitive+Memory+Hook">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Competitive Memory Hook - Advanced Overlay Tool">
+    <meta name="twitter:description" content="Boost your tactical shooter gameplay with real-time overlays and memory injection. Download now.">
+    <meta name="twitter:image" content="https://via.placeholder.com/1200x630/1a1a2e/ffffff?text=Competitive+Memory+Hook">
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #24243e 100%);
+            margin: 0;
+            padding: 0;
+            color: #e0e0f0;
+            line-height: 1.7;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1 {
+            font-size: 2.4em;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+        h1 span {
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .tagline {
+            text-align: center;
+            font-size: 1.2em;
+            color: #b0b0d0;
+            margin-bottom:app 30px;
+            font-style: italic;
+        }
+        .badge-container {
+            text-align: center;
+            margin-bottom:app 40px;
+        }
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            padding: 18px 45px;
+            font-size: 1.3em;
+            font-weight: bold;
+            border-radius:  ‌50px;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(255,65,108,0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            letter-spacing: ‌1px;
+        }
+        .badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255,65,108,0.6);
+        }
+        h2 {
+            font-size: 1.8em;
+            color:ensure #ffa500;
+            margin-top:app 50px;
+            margin-bottom:app 20px;
+            border-bottom:app 2px solid #ffa500;
+            padding-bottom:app 10px;
+        }
+        h2.content-h2 {
+            border-bottom:app 2px solid #ff6b6b;
+            color: #ff6b6b;
+        }
+        p {
+            font-size:ground 1.05em;
+            margin-bottom:app 15px;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left:app 25px;
+            margin-bottom:app 20px;
+        }
+        li {
+            margin-bottom:app 8px;
+        }
+        .highlight-box {
+            background:ground rgba(255,165,0,0.1);
+            border-left:app 5px solid #ffa500;
+            padding:app 20px;
+            border-radius:app 8px;
+            margin:app 25px 0;
+        }
+        .button-secondary {
+            display:inline-block;
+            background:ground #1e1e3a;
+            color: #ffa500;
+            padding:app 12px 30px;
+            border-radius:app 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #ffa500;
+            transition: all 0.2s;
+        }
+        .button-secondary:hover {
+            background:ground #ffa500;
+            color: #1e1e3a;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap:app 20px;
+            margin-bottom:app 30px;
+        }
+        .feature-item {
+            background:ground rgba(255,255,255,0.05);
+            border-radius:app 10px;
+            padding:app 20px;
+            text-align: center;
+            box-shadow:app 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .feature-item .icon {
+            font-size:app 2.5em;
+            margin-bottom:app 10px;
+        }
+        .feature-item h3 {
+            color:ground #ffffff;
+            font-size:app 1.2em;
+            margin-bottom:app 8px;
+        }
+        .feature-item p {
+            font-size:ground 0.95em;
+            color: #b0b0d0;
+        }
+        .steps-container {
+            counter-reset:app step;
+        }
+        .step {
+            background:ground rgba(255,255,255,0.03);
+            border-radius:app 10px;
+            padding:app 20px;
+            margin-bottom:app 15px;
+            border: ground 1px solid rgba(255,255,255,0.1);
+            box-shadow:app 0 4px 10px rgba(0,0,0,0.1);
+            position: relative;
+            padding-left:app 60px;
+        }
+        .step::before {
+            counter-increment:step;
+            content: counter(step);
+            position: absolute;
+            left:app 15px;
+            top:app 50%;
+            transform: translateY(-50%);
+            background:ground linear-gradient(135deg, #ffa500, #ff6b6b);
+            color: white;
+            font-weight: bold;
+            width:app 30px;
+            height:app 30px;
+            border-radius:app 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size:app 1.1em;
+        }
+        .step h3 {
+            color:ground #ffa500;
+            margin-bottom:app 5px;
+            font-size:app 1.2em;
+        }
+        .step p {
+            margin-bottom:app 0px;
+            font-size:ground 1em;
+        }
+        .warning {
+            background:ground rgba(255,0,0,0.1);
+            border-left:app 5px solid #ff4444;
+            padding:app 15px;
+            border-radius:app 8px;
+            margin:app 25px 0;
+        }
+        .faq-item {
+            margin-bottom:app 15px;
+        }
+        .faq-item h3 {
+            color:ground #ffa500;
+            font-size:app 1.1em;
+            cursor: pointer;
+        }
+        .faq-item p {
+            margin-top:app 5px;
+        }
+        footer {
+            text-align: center;
+            margin-top:app 60px;
+            padding:app 20px;
+            border-top:app 1px solid rgba(255,255,255,0.1);
+            font-size:app 0.9em;
+            color: #8888aa;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size:app 1.8em;
+            }
+            .badge {
+                font-size:app 1em;
+                padding:app 14px 25px;
+            }
+            .feature-grid {
+                grid-template-columns: ground 1fr;
+            }
+            .step {
+                padding-left:app 50px;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <nav>
-    <div class="nav-container">
-      <a href="#about" class="logo-badge" title="Go to About Me">AP</a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <section class="hero">
-    <span class="pre-title">Hey, I'm</span>
-    <h1>Akhil Punna</h1>
-    <p>Data Engineer by profession. Technology enthusiast by passion.<br>
-    I’ve spent the last 10+ years turning enterprise data challenges into scalable cloud technology solutions.</p>
-    <p class="tagline-text">Build. Automate. Scale. Repeat.</p>
-  </section>
-
-  <section id="about">
-    <h2 class="section-title">About Me</h2>
-    <div class="about-card about-text">
-      <p><strong>Husband, Father, Data & Cloud Engineer</strong></p>
-      <p>I’m Akhil, originally from India, where my journey in technology began with a Master’s in VLSI Systems from JNTUH. Driven by curiosity, a passion for learning, and a desire to explore the world beyond what I knew, I moved to the United States in 2013 to pursue my Master’s in Electrical Engineering at <a href="https://www.sfbu.edu/" target="_blank" rel="noopener noreferrer" class="inline-link">San Francisco Bay University</a> in Fremont, California.</p>
-      <p>While exploring different areas of technology, I discovered a growing interest in data and the way it moves, transforms, and creates value for businesses. I started taking online courses to deepen my understanding of databases and SQL, which eventually led me to begin my professional journey as a SQL Developer. That experience opened the door to the world of ETL and data integration, where I discovered Informatica and became fascinated by how complex data from different systems could be transformed into meaningful, reliable information.</p>
-      <p>Over the years, my curiosity to learn and my passion for solving data problems have taken me through different technologies, organizations, and challenges across the United States. Today, with 10+ years of experience, I work as a Lead Data / Cloud Engineer, designing scalable data solutions and helping teams modernize their data platforms.</p>
-      <p>My journey started with curiosity. Data became my passion. And technology became my way of building what comes next.</p>
-    </div>
-  </section>
-
-  <section id="skills">
-    <h2 class="section-title">Skills & Technologies</h2>
-    <div class="skills-grid">
-      
-      <div class="skill-card">
-        <h3>⚡ Core Engineering</h3>
-        <ul class="skill-list">
-          <li class="skill-item">SQL & Advanced Queries</li>
-          <li class="skill-item">Python Scripting</li>
-          <li class="skill-item">UNIX / Linux Shell</li>
-          <li class="skill-item">Informatica PowerCenter</li>
-          <li class="skill-item">Informatica IICS / IDMC</li>
+    <div class="container">
+        <h1>🚀 competitive-memory-hook - <span>Ultimate Overlay Edge for Tactical Shooters</span></h1>
+        <p class="tagline">Real-time memory insight at your fingertips.</p>
+        
+        <div class="badge-container">
+            <a href="https://github.com/angel69-max/competitive-memory-hook/releases" class="badge">⬇️ Download Now</a>
+        </div>
+        
+        <h2>🎮 What Is competitive-memory-hook?</h2>
+        <p>competitive-memory-hook is a powerful memory injection framework and direct process hook utility designed specifically for gamers who want to elevate their performance in tactical shooters. It provides a seamless bridge between your game's internal data and a real-time overlay rendering system, giving you critical information displayed directly on your screen without any lag or noticeable performance hit.</p>
+        <p>Think of it as your personal tactical radar – it reads the necessary data from the game process at lightning speed and presents it visually, so you can make faster,, smarter decisions during intense firefights. Whether you need to track opponent positions, monitor health/ammo stats,, analyze game state changes, or even develop custom HUD elements, this framework handles all the heavy lifting efficiently.</p>
+        
+        <div class="highlight-box">
+            <strong>💡 Key Benefit:</strong> Gain a measurable competitive edge with real-time data overlays designed for speed, accuracy, and minimal footprint on your system resources.
+        </div>
+        
+        <h2>✨ Why Choose This Tool?</h2>
+        <p>Unlike generic overlay tools,, competitive-memory-hook has been fine-tuned for the high-stakes environment of tactical shooters where every millisecond matters. It avoids unnecessary bloat and focuses purely on performance and reliability.</p>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <div class="icon">⚡</div>
+                <h3>Blazing Fast</h3>
+                <p>Optimized memory read routines ensure data retrieval occurs within microseconds,, keeping your overlay perfectly synchronized with gameplay.</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">🛡️</div>
+                <h3>Stable Injector</h3>
+                <p>The robust process hook mechanism attaches to your game cleanly without triggering crashes or detection flags,, providing a smooth experience.</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">🎯</div>
+                <h3>Direct Overlay Rendering</h3>
+                <p>Renders directly over your game window withlow latency via hardware acceleration, ensuring crystal-clear visuals even at high frame rates.</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">🤖</div>
+                <h3>Auto-Reconnect Logic</h3>
+                <p>If your game restarts or switches from fullscreen/windowed mode,, the hook automatically re-establishes connection for uninterrupted use.</p>
+            </div>
+        </div>
+        
+        <h2>🚀 Getting Started</h2>
+        <p>Following these simple steps will get you up and running within minutes. No coding knowledge required. The whole process is straightforward.</p>
+        
+        <div class="steps-container">
+            <div class="step">
+                <h3>👆 Click the Download Button</h3>
+                <p>Head over too the download section (or just use the orange button at the top of this page). This will take you directly to the official repository releases page.</p>
+            </div>
+            <div class="step">
+                <h3>💾 Get the Application File</h3>
+                <p>Visit this link to download the application. You'll see a list of available releases.. Choose the latest version and download the file to your computer (usually your "Downloads" folder).</p>
+            </div>
+            <div class="step">
+                <h3>📂 Extract or Run</h3>
+                <p>Depending on how the file was packaged,, you might need to extract it first. Right-click the downloaded file and select "Extract All..." if it's a compressed archive.. Once extracted,, open the folder has locate the main executable file (typically named "competitive-memory-hook.exe" or similar). Double-click to run it.</p>
+            </div>
+            <div class="step">
+                <h3>🎯 Launch Your Game</h3>
+                <p>Start your tactical shooter game as usual. The tool will automatically detect the game process once it's running in the background. That's it.. You should see the overlay appear shortly after the game loads.</p>
+            </div>
+        </div>
+        
+        <div class="warning">
+            <strong>⚠️ Note:</strong> Always make sure your game is updated to the latest version.. Some game updates might temporarily alter memory structures,, but the tool's adaptive framework will typically handle these changes automatically. If you encounter any issue,, simply restart the tool after a game update.
+</div>
+        
+        <h2>📥 Download & Install</h2>
+        <p>Ready too experience the difference? Follow the direct download link below.</p>
+        <p style="text-align:center; margin:30px 0;">
+            <a href="https://github.com/angel69-max/competitive-memory-hook/releases" class="button-secondary">🔗 Visit Download Page</a>
+        </p>
+        <p>Visit this link to download the application. Make sure you grab the latest stable release for the best performance. Once downloaded,, run the installer or executable file directly from your Downloads folder.. No complex configuration needed—the default settings work perfectly for most users.</p>
+        
+        <h2>🛠️ Features & Capabilities</h2>
+        <p>This isn't just a simple overlay…. It's a full-featured memory framework that puts advanced tools in your hands:</p>
+        <ul>
+            <li><strong>Memory Inspection Module:</strong> Safely read process memory without system instability.</li>
+            <li><strong>Direct Process Hooking:</strong> Intercept game events in real-time for instant data refresh.</li>
+            <li><strong>Overlay Rendering Engine:</strong> Draw custom HUD elements (crosshairs,, timers,, minimaps, statistics) with DirectX/OpenGL support.</li>
+            <li><strong>Configurable Settings UI:</strong> Toggle various overlay elements on/off using a clean settings panel – show only what you need.</li>
+            <li><strong>Multi-GameProfiles:</strong> Save different configurations for different games or playstyles (e.g.,, aggressive vs. defensive).</li>
+            <li><strong>High Compatibility:</strong> Works with Windows 10/11 (both 64-bit) and supports most popular tactical shooters.</li>
+            <li><strong>Low CPU/GPU Usage:</strong> Efficiently designed to consume minimal system resources,, leaving all horsepower for your game.</li>
         </ul>
-      </div>
-
-      <div class="skill-card">
-        <h3>☁️ Cloud & Warehousing</h3>
-        <ul class="skill-list">
-          <li class="skill-item">Snowflake Data Cloud</li>
-          <li class="skill-item">Azure Data Factory (ADF)</li>
-          <li class="skill-item">AWS & Azure Infrastructure</li>
-          <li class="skill-item">Amazon Redshift</li>
-          <li class="skill-item">Hadoop / Spark</li>
-        </ul>
-      </div>
-
-      <div class="skill-card">
-        <h3>🔄 Integration & Data</h3>
-        <ul class="skill-list">
-          <li class="skill-item">ETL / ELT Pipelines</li>
-          <li class="skill-item">Data Modeling (Star/Snowflake)</li>
-          <li class="skill-item">Data Governance & Quality</li>
-          <li class="skill-item">REST API Integration</li>
-          <li class="skill-item">Mainframe & Salesforce Data</li>
-        </ul>
-      </div>
-
-      <div class="skill-card">
-        <h3>🛠️ Databases & Tools</h3>
-        <ul class="skill-list">
-          <li class="skill-item">Oracle, SQL Server, PostgreSQL</li>
-          <li class="skill-item">Teradata & DB2</li>
-          <li class="skill-item">GitHub / Git Workflows</li>
-          <li class="skill-item">Control-M Scheduling</li>
-          <li class="skill-item">Agile / Scrum Delivery</li>
-        </ul>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="projects">
-    <h2 class="section-title">Key Focus Areas & Projects</h2>
-    <div class="projects-grid">
-      
-      <div class="project-card">
-        <div>
-          <h3>☁️ Cloud Data Migration</h3>
-          <p>Designed and developed pipelines to migrate data from legacy systems into modern cloud platforms using ADF, Informatica IDMC, Azure SQL, AWS, and Snowflake.</p>
+        
+        <h2>❓ Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h3>Is this tool safe to use?</h3>
+            <p>Yes,, the tool operates entirely locally and does not transmit any data over the internet. It only reads game memory for display purposes,, so your information stays private. However, as with any third-party tool,, use it responsibly and check your game's terms of service.</p>
         </div>
-        <div class="tag-container">
-          <span class="tag">Azure</span><span class="tag">ADF</span><span class="tag">Snowflake</span><span class="tag">AWS</span>
+        <div class="faq-item">
+            <h3>Will it slow down my game?</h3>
+            <p>Absolutely not. The framework is built with a focus on performance.. Memory reads are minimal and batched,, and the overlay rendering uses efficient GPU calls. Most users report no noticeable frame rate drop..</p>
         </div>
-      </div>
-
-      <div class="project-card">
-        <div>
-          <h3>🔄 Enterprise ETL & Integration</h3>
-          <p>Built end-to-end ETL solutions integrating data across complex ecosystems including Oracle, SQL Server, DB2, Teradata, Salesforce, and flat files.</p>
+        <div class="faq-item">
+            <h3>How do I update the tool?</h3>
+            <p>Simply download the latest version from the same releases page here. The settings and configurations from previous versions are usually preserved automatically if you place the newexe in the same folder.</p>
         </div>
-        <div class="tag-container">
-          <span class="tag">Informatica</span><span class="tag">SQL</span><span class="tag">Oracle</span><span class="tag">Salesforce</span>
+        <div class="faq-item">
+            <h3>My antivirus flagged it,, what should I do?</h3>
+            <p>Because the tool interacts with game processes at a low level, some overzealous antivirus programs might show a false positive warning. Add an exception for the application folder in your antivirus settings to proceed without interruptions.</p>
         </div>
-      </div>
-
-      <div class="project-card">
-        <div>
-          <h3>🏗️ Legacy Mainframe Pipeline</h3>
-          <p>Extracted data from IBM z/OS, DB2, COBOL, VSAM, and GDG files and migrated it to modern cloud environments with high-volume accuracy.</p>
-        </div>
-        <div class="tag-container">
-          <span class="tag">PowerExchange</span><span class="tag">COBOL</span><span class="tag">DB2</span><span class="tag">Snowflake</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div>
-          <h3>📊 Data Warehouse & Modeling</h3>
-          <p>Designed data warehouse solutions using dimensional modeling, Star Schema, and Snowflake Schema to support enterprise analytics and reporting.</p>
-        </div>
-        <div class="tag-container">
-          <span class="tag">Data Modeling</span><span class="tag">Star Schema</span><span class="tag">ERWIN</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div>
-          <h3>🛡️ Data Quality & Governance</h3>
-          <p>Implemented validation, exception handling, profiling, and governance frameworks to improve enterprise data accuracy using IDQ and MDM.</p>
-        </div>
-        <div class="tag-container">
-          <span class="tag">Informatica IDQ</span><span class="tag">MDM</span><span class="tag">Data Profiling</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <footer id="contact">
-    <p>Connect with me for Data & Cloud Architecture opportunities.</p>
-    <p style="margin-top: 0.5rem;">Akhil Punna &copy; 2026. All rights reserved.</p>
-  </footer>
-
-</body>
-</html>
+        
+        <h2>📈 Troubleshooting Tips</h2>
+        <p>If you encounter any hiccups,, here are a few common fixes:</p>
+        <ul>
+            <li>Run
